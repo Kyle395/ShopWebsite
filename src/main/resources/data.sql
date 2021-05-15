@@ -1,0 +1,1 @@
+INSERT INTO customers (login, password, email) VALUES ("admin", "admin", "admin@localhost")
