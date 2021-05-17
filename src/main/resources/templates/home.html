@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{${bulmaPath}}" />
+    <link rel="stylesheet" th:href="@{${fontsPath}}" />
+    <script th:src="@{${jqueryPath}}"></script>
+</head>
+<body>
+<div th:replace="fragments.html :: nav(user=${user})"></div>
+</body>
+</html>
