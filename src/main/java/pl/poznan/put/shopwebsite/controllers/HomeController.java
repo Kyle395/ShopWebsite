@@ -19,4 +19,12 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String getHome(HttpSession session, Model model) {
+        model.addAttribute("user", session.getAttribute("user"));
+        Constants.addLibs(model);
+
+        return "home";
+    }
+
 }
