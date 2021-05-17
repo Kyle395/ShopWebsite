@@ -5,24 +5,21 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
+@Table(name = "subcategories")
 @Getter @Setter @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class SubCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String picture;
-
     @ManyToOne
-    @JoinColumn(name = "subcategory_id")
-    private SubCategory subcategoryId;
+    @JoinColumn(name = "category_id")
+    private Category categoryId;
 
     @Column
-    private String description;
+    private String name;
 
 }

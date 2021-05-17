@@ -3,26 +3,20 @@ package pl.poznan.put.shopwebsite.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "categories")
 @Getter @Setter @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String picture;
-
-    @ManyToOne
-    @JoinColumn(name = "subcategory_id")
-    private SubCategory subcategoryId;
-
-    @Column
-    private String description;
+    private String name;
 
 }

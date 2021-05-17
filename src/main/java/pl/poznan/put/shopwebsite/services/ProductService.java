@@ -1,0 +1,20 @@
+package pl.poznan.put.shopwebsite.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pl.poznan.put.shopwebsite.entities.Product;
+import pl.poznan.put.shopwebsite.repositories.ProductRepository;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
+
+}
