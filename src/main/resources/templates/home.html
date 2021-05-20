@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" th:href="@{${bulmaPath}}" />
-    <link rel="stylesheet" th:href="@{${fontsPath}}" />
-    <script th:src="@{${jqueryPath}}"></script>
+    <th:block th:replace="fragments/common.html :: libs"/>
 </head>
 <body>
-<div th:replace="fragments.html :: nav(user=${user})"></div>
-<div th:replace="fragments.html :: navCat"></div>
+<th:block th:replace="fragments/common.html :: header"/>
+<th:block th:replace="fragments/common.html :: navBar"/>
 </body>
 </html>
