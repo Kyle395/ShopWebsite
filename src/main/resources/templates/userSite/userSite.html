@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<style>
+	.rcorners1 {
+		border-radius: 1px;
+		background: #73AD21;
+		max-width: 1000px;
+		margin: auto;
+	}
+	.content {
+		width: 80%;
+		max-width: 1000px;
+		margin: auto;
+		font-size:30px
+	}
+	table {
+		border-collapse: collapse;
+		width: 80%;
+	}
+	td, th {
+		border: 1px solid #cccccc;
+		padding: 8px;
+	} 
+	th {
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+</style>
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="fragments/common.html :: libs"/>
+</head>
+<body>
+<th:block th:replace="fragments/common.html :: header(user=${user})" />
+<th:block th:replace="fragments/common.html :: navBar" />
+<h1 class="content">Panel użytkownika</h1>
+<hr class="rcorners1" style="width: 80%;">
+<br>
+<h1 class="content">Historia zamówień</h1>
+<hr class="rcorners1" style="width: 80%;">
+<br>
+<div id="orderTable"/>
+<script src="js/userSite/userSite.js"></script>
+
+
+</body>
+</html>

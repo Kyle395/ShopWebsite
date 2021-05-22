@@ -25,4 +25,13 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/userSite", method = RequestMethod.GET)
+    public String getUserSite(HttpSession session, Model model) {
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("categories", categoryService.getAllCategories());
+        Constants.addLibs(model);
+
+        return "userSite/userSite";
+    }
+
 }
