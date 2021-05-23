@@ -27,9 +27,12 @@ public class CategoryService {
         return subCategoryRepository.findAll();
     }
 
+    public List<SubCategory> getALlSubCategories() {
+        return subCategoryRepository.findAll();
+    }
+
     public Map<String, List<String>> getAllCategories() {
         Map<String, List<String>> allCategories = new HashMap<>();
-
         List<Category> categories = categoryRepository.findAll();
         for (Category category : categories) {
             List<String> subCategories = subCategoryRepository.getSubCategoryByCategoryId(category).stream()
