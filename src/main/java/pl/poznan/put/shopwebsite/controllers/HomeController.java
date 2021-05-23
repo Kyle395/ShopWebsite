@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.poznan.put.shopwebsite.Constants;
+import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.services.CategoryService;
+import pl.poznan.put.shopwebsite.services.OrderService;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +18,9 @@ public class HomeController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex(HttpSession session, Model model) {
@@ -32,6 +38,18 @@ public class HomeController {
         Constants.addLibs(model);
 
         return "userSite/userSite";
+    }
+
+    @RequestMapping(value = "/userSite/orderDetails", method = RequestMethod.GET)
+    public String getOrderDetails(HttpSession session, Model model,
+                                  @RequestParam Long id) {
+        Customer customer = (Customer) session.getAttribute("user");
+        model.addAttribute("user", customer);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("orderDetails", orderService.getOrderDetails(customer, id));
+        Constants.addLibs(model);
+
+        return "userSite/orderDetails";
     }
 
     @RequestMapping(value = "/userSite/changeAddress", method = RequestMethod.GET)
