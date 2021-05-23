@@ -1,3 +1,6 @@
-.navbar-item:hover{
+.navbar-item a:hover, a:hover span{
+    color: #45a321
+}
+.navbar-link a:hover, a:hover span{
     color: #45a321
 }
