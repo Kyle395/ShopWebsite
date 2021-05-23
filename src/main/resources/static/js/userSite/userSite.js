@@ -18,7 +18,7 @@ function orderContent(orderList) {
 }
 
 $.ajax({
-    url: "https://localhost:8080/orders",
+    url: "/orders",
     method: "GET",
     timeout: "3000",
     contentType: "application/json",
