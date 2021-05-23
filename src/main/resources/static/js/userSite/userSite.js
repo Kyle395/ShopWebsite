@@ -7,7 +7,7 @@ function orderContent(orderList) {
         dataHtml+=`<table><thead><tr><th>Numer zamówienia</th><th>Data złożenia zamówienia</th>` +
             `<th> Wartość zamówienia</th></tr></thead><tbody>`;
         for (let order of orderList) {
-            dataHtml+=`<tr><td><a href="/orders/details?id=${order.id}">${order.id}</a></td><td>${order.createdAt}</td><td>${order.total}</td></tr>`;
+            dataHtml+=`<tr><td><a href="/userSite/orderDetails?id=${order.id}">${order.id}</a></td><td>${order.createdAt}</td><td>${order.total}</td></tr>`;
         }
         dataHtml+=`</tbody></table>`;
     } else {

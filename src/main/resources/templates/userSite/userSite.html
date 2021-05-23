@@ -1,57 +1,10 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:href="http://www.w3.org/1999/xhtml">
-<style>
-    .previous {
-        background-color: #f1f1f1;
-        color: black;
-    }
-    .next {
-        background-color: #45a321;
-        color: white;
-    }
-	.rcorners1 {
-        height: 3px;
-		background: #45a321;
-		max-width: 1000px;
-		margin: auto;
-	}
-	.content {
-        font-weight: bold;
-		max-width: 1000px;
-		margin: auto;
-		font-size:30px
-	}
-    .insideContent {
-        max-width: 1000px;
-        width: 100%;
-        margin: auto;
-        font-size:20px;
-        font-weight: inherit;
-    }
-	table {
-		border-collapse: collapse;
-		width: 100%;
-        max-width: 1000px;
-        margin: auto;
-        font-size:20px
-	}
-	td, th {
-        text-indent: 5%;
-		border: 1px solid #cccccc;
-		padding-left: 20px;
-	} 
-	th {
-		font-weight: bold;
-		text-transform: uppercase;
-	}
-    tr:nth-child(even) {
-        background-color: #ccf2bd;
-    }
-</style>
 <head>
     <title>Strona panelu użytkownika</title>
     <meta charset="UTF-8">
     <th:block th:replace="fragments/common.html :: libs"/>
+    <link rel="stylesheet" href="/css/userSite/userStyle.css"/>
 </head>
 <body>
     <th:block th:replace="fragments/common.html :: header(user=${user})" />
