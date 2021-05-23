@@ -7,6 +7,7 @@
         <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
         <link rel="stylesheet" th:href="@{${fontsPath}}"/>
         <link rel="stylesheet" href="/css/common/hovers.css"/>
+        <link rel="stylesheet" href="/css/common/login.css"/>
         <script th:src="@{${jqueryPath}}"></script>
     </th:block>
 </head>
@@ -25,7 +26,7 @@
         <div class="navbar-menu">
 
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="/">
                     Home
                 </a>
 
@@ -37,13 +38,13 @@
             <div class="navbar-end">
                 <div th:if="${user != null}" class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        <div class="button" style="background-color:#45a321;color: white;white-space: pre">logged as <span th:text="${user != null} ? ${user.login} : 'null'" style="color: white"></span></div>
+                        <div class="button" style="background-color:#45a321;color: white;white-space: pre">logged as <span th:text="${user.login}" style="color: white"></span></div>
                     </a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="/userSite">
                             Profile
                         </a>
-                        <a class="navbar-item">
+                        <a class="navbar-item" onclick="submitLogout()">
                             Logout
                         </a>
                     </div>
@@ -52,10 +53,10 @@
                 <div th:if="${user == null}" class="navbar-item">
                     <div class="buttons">
                         <a class="button" style="background-color:#45a321; color: white">
-                            <strong>Sign up</strong>
+                            <strong>Rejestracja</strong>
                         </a>
-                        <a class="button is-light">
-                            Log in
+                        <a class="button is-light" id="loginButton" onclick="turnLoginOn()">
+                            <strong>Logowanie</strong>
                         </a>
                     </div>
                 </div>
@@ -69,25 +70,43 @@
             </div>
         </div>
     </nav>
+    <div th:if="${user == null}" class="modal" id="loginModal">
+        <div class="modal-background" id="lbg" onclick="turnLoginOff()"></div>
+        <div class="modal-card">
+            <form class="box" onsubmit="return false">
+                <div class="field">
+                    <label class="label">Nazwa użytkownika</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="nazwa użytkownika" id="username">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Hasło</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="********" id="password">
+                    </div>
+                </div>
+
+                <button class="button is-primary" onclick="submitLogin()">Zaloguj</button>
+            </form>
+        </div>
+    </div>
+    <script src="/js/common/login.js"></script>
 </div>
 
 <div th:fragment="navBar">
         <div class="navbar-menu" style="flex-grow: 1; justify-content: center;">
-
-<!--            <div th:each="entry: ${categories}" class="navbar-dropdown">-->
-<!--                <div class="navbar-item">-->
-<!--                    <span th:text="${entry.key}"></span>-->
-<!--                </div>-->
-                <div class="navbar-item has-dropdown is-hoverable" th:each="entry: ${categories}">
-                    <a>
-                        <span class="navbar-link" th:text="${entry.key}" :hover{color:green}></span>
+            <div class="navbar-item has-dropdown is-hoverable" th:each="entry: ${categories}">
+                <a class="navbar-link">
+                    <span th:text="${entry.key}" :hover{color:green}></span>
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" th:each="sub: ${entry.value}">
+                        <span th:text="${sub.name}"></span>
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" th:each="sub: ${entry.value}">
-                            <span th:text="${sub}"></span>
-                        </a>
-                    </div>
                 </div>
+            </div>
         </div>
 </div>
 </body>
