@@ -20,9 +20,4 @@ public class Stock {
     @Column
     private Double price;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "product_id")
-    private Product product;
-
 }
