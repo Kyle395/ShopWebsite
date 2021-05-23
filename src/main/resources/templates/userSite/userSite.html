@@ -49,23 +49,22 @@
     }
 </style>
 <head>
-<meta charset="UTF-8">
-<th:block th:replace="fragments/common.html :: libs"/>
+    <title>Strona panelu użytkownika</title>
+    <meta charset="UTF-8">
+    <th:block th:replace="fragments/common.html :: libs"/>
 </head>
 <body>
-<th:block th:replace="fragments/common.html :: header(user=${user})" />
-<th:block th:replace="fragments/common.html :: navBar" />
-<h1 class="content">Panel użytkownika</h1>
-<hr class="rcorners1" style="width: 80%;">
-<br>
-<h1 class="insideContent"><a href="userSite/changeAdress">Zmień adres&emsp;</a><a href="userSite/changePassword">Zmień hasło</a></h1>
-<br><br>
-<h1 class="content">Historia zamówień</h1>
-<hr class="rcorners1" style="width: 80%;">
-<br>
-<div id="orderTable"/>
-<script src="js/userSite/userSite.js"></script>
-
-
+    <th:block th:replace="fragments/common.html :: header(user=${user})" />
+    <th:block th:replace="fragments/common.html :: navBar" />
+    <h1 class="content">Panel użytkownika</h1>
+    <hr class="rcorners1" style="width: 80%;">
+    <br>
+    <h1 class="insideContent"><a href="userSite/changeAddress">Zmień adres email&emsp;</a><a href="userSite/changePassword">Zmień hasło</a></h1>
+    <br><br>
+    <h1 class="content">Historia zamówień</h1>
+    <hr class="rcorners1" style="width: 80%;">
+    <br>
+    <div id="orderTable"/>
+    <script src="js/userSite/userSite.js"></script>
 </body>
 </html>

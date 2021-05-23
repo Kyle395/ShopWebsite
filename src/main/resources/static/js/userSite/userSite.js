@@ -1,10 +1,4 @@
-let orderList = [];
-
-orderList.push({ id:1, date:"22-04-21", total:420.50 }, { id:2, date:"21-04-21", total:50 });
-
-window.onload = () => {
-    orderContent(orderList);
-}
+let currentSite = 0;
 
 function orderContent(orderList) {
     let content = document.getElementById('orderTable');
@@ -13,7 +7,7 @@ function orderContent(orderList) {
         dataHtml+=`<table><thead><tr><th>Numer zamówienia</th><th>Data złożenia zamówienia</th>` +
             `<th> Wartość zamówienia</th></tr></thead><tbody>`;
         for (let order of orderList) {
-            dataHtml+=`<tr><td>${order.id}</td><td>${order.date}</td><td>${order.total}</td></tr>`;
+            dataHtml+=`<tr><td><a href="/orders/details?id=${order.id}">${order.id}</a></td><td>${order.createdAt}</td><td>${order.total}</td></tr>`;
         }
         dataHtml+=`</tbody></table>`;
     } else {
@@ -22,3 +16,21 @@ function orderContent(orderList) {
     console.log(dataHtml);
     content.innerHTML = dataHtml;
 }
+
+$.ajax({
+    url: "https://localhost:8080/orders",
+    method: "GET",
+    timeout: "3000",
+    contentType: "application/json",
+    data: {
+        pageNum: currentSite
+    },
+    dataType: "json",
+    success: function (data, status, xhr) {
+        console.log(data);
+        orderContent(data);
+    },
+    error: function (xhr, status, error) {
+        alert("coś się zjebało, kod błędu: " + status);
+    }
+});

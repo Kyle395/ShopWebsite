@@ -34,4 +34,22 @@ public class HomeController {
         return "userSite/userSite";
     }
 
+    @RequestMapping(value = "/userSite/changeAddress", method = RequestMethod.GET)
+    public String getAddress(HttpSession session, Model model) {
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("categories", categoryService.getAllCategories());
+        Constants.addLibs(model);
+
+        return "userSite/changeAddress";
+    }
+
+    @RequestMapping(value = "/userSite/changePassword", method = RequestMethod.GET)
+    public String getPassword(HttpSession session, Model model) {
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("categories", categoryService.getAllCategories());
+        Constants.addLibs(model);
+
+        return "userSite/changePassword";
+    }
+
 }
