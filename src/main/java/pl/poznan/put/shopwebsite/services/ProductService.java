@@ -6,6 +6,7 @@ import pl.poznan.put.shopwebsite.entities.Product;
 import pl.poznan.put.shopwebsite.repositories.ProductRepository;
 import pl.poznan.put.shopwebsite.repositories.StockRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public double getProductPrice(Product product) {
+    public BigDecimal getProductPrice(Product product) {
         return stockRepository.getOne(product.getId()).getPrice();
     }
 

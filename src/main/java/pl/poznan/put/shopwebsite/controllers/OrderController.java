@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.poznan.put.shopwebsite.Constants;
 import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.entities.Order;
 import pl.poznan.put.shopwebsite.entities.OrderDetails;
@@ -19,6 +20,7 @@ import pl.poznan.put.shopwebsite.services.orders.OrderDto;
 import pl.poznan.put.shopwebsite.services.orders.ProductDto;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,14 +52,18 @@ public class OrderController {
 
         return orders.stream()
                 .map(order -> {
-                    double total = orderService.getOrderDetails(order).stream()
-                            .mapToDouble(orderDetails -> {
-                                double price = productService.getProductPrice(orderDetails.getProductId());
-                                return price * orderDetails.getQuantity();
+                    BigDecimal total = orderService.getOrderDetails(order).stream()
+                            .map(orderDetails -> {
+                                BigDecimal price = productService.getProductPrice(orderDetails.getProductId());
+                                return price.multiply(BigDecimal.valueOf(orderDetails.getQuantity()));
                             })
-                            .sum();
+                            .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-                    return new OrderDto(order.getId(), order.getCreatedAt(), total);
+                    return new OrderDto(
+                            order.getId(),
+                            Constants.DATE_FORMATTER.format(order.getCreatedAt()),
+                            total
+                    );
                 })
                 .collect(Collectors.toList());
     }

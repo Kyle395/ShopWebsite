@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDetailsDto {
     private Long id;
-    private Date createdAt;
+    private String createdAt;
 
     private List<ProductDto> products;
-    private double total;
+    private BigDecimal total;
 }

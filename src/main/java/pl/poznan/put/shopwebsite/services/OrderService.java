@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.poznan.put.shopwebsite.Constants;
 import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.entities.Order;
 import pl.poznan.put.shopwebsite.entities.OrderDetails;
@@ -15,6 +16,8 @@ import pl.poznan.put.shopwebsite.services.orders.ProductDto;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,20 +66,20 @@ public class OrderService {
                 .map(orderDetails -> {
                     Product product = orderDetails.getProductId();
 
-                    double price = productService.getProductPrice(product);
+                    BigDecimal price = productService.getProductPrice(product);
                     long quantity = orderDetails.getQuantity();
 
                     return new ProductDto(
-                            product.getName(), price, quantity, price * quantity
+                            product.getName(), price, quantity, price.multiply(BigDecimal.valueOf(quantity))
                     );
                 })
                 .collect(Collectors.toList());
 
         return new OrderDetailsDto(
-                order.getId(), order.getCreatedAt(), products,
+                order.getId(), Constants.DATE_FORMATTER.format(order.getCreatedAt()), products,
                 products.stream()
-                        .mapToDouble(ProductDto::getTotal)
-                        .sum()
+                        .map(ProductDto::getTotal)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)
         );
     }
 

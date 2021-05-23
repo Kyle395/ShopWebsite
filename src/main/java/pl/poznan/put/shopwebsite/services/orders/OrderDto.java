@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -13,6 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class OrderDto {
     private Long id;
-    private Date createdAt;
-    private double total;
+    private String createdAt;
+    private BigDecimal total;
 }

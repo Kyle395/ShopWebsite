@@ -2,6 +2,9 @@ package pl.poznan.put.shopwebsite;
 
 import org.springframework.ui.Model;
 
+import java.text.SimpleDateFormat;
+
+
 public class Constants {
 
     public static final boolean DEBUG = true;
@@ -14,6 +17,8 @@ public class Constants {
 
     public static final String JQUERY_PATH = "/js/jquery-3.6.0.min.js";
     public static final String JQUERY_DEBUG_PATH = "/js/jquery-3.6.0.js";
+
+    public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     public static void addLibs(Model model) {
         model.addAttribute("bulmaPath", DEBUG ? BULMA_DEBUG_PATH : BULMA_PATH);

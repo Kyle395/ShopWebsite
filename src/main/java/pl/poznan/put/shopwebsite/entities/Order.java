@@ -1,7 +1,6 @@
 package pl.poznan.put.shopwebsite.entities;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +17,6 @@ public class Order {
     private Long id;
 
     @Column
-    @CreatedDate
     private Date createdAt;
 
     @ManyToOne
