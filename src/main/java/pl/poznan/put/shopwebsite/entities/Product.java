@@ -16,6 +16,9 @@ public class Product {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String picture;
 
     @ManyToOne
