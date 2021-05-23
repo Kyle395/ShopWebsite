@@ -6,6 +6,7 @@ import pl.poznan.put.shopwebsite.entities.Category;
 import pl.poznan.put.shopwebsite.entities.SubCategory;
 import pl.poznan.put.shopwebsite.repositories.CategoryRepository;
 import pl.poznan.put.shopwebsite.repositories.SubCategoryRepository;
+import pl.poznan.put.shopwebsite.services.category.SubCategoryDto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,19 +28,21 @@ public class CategoryService {
         return subCategoryRepository.findAll();
     }
 
-    public Map<String, List<String>> getAllCategories() {
-        Map<String, List<String>> allCategories = new HashMap<>();
+    public List<SubCategory> getALlSubCategories() {
+        return subCategoryRepository.findAll();
+    }
 
-        List<Category> categories = categoryRepository.findAll();
-        for (Category category : categories) {
-            List<String> subCategories = subCategoryRepository.getSubCategoryByCategoryId(category).stream()
-                    .map(SubCategory::getName)
-                    .collect(Collectors.toList());
-
-            allCategories.put(category.getName(), subCategories);
-        }
-
-        return allCategories;
+    public Map<String, List<SubCategoryDto>> getAllCategories() {
+        return subCategoryRepository.findAll().stream()
+                .sorted(Comparator.comparing(SubCategory::getName))
+                .collect(Collectors.groupingBy(
+                        subCategory -> subCategory.getCategoryId().getName(),
+                        LinkedHashMap::new,
+                        Collectors.mapping(
+                                subCategory -> new SubCategoryDto(subCategory.getId(), subCategory.getName()),
+                                Collectors.toList()
+                        )
+                ));
     }
 
 }
