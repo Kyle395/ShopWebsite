@@ -13,5 +13,21 @@
     <h1 class="content">Zmiana adresu email</h1>
     <hr class="rcorners1" style="width: 80%;">
     <br>
+    <form class="box" style="max-width: 1000px; margin: auto" onsubmit="return false">
+        <div class="field">
+            <label class="label">Podaj nowy email</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Nowy email" id="oldPassword">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Potwierdź nowy email</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Wpisz ponownie" id="newPassword1">
+            </div>
+        </div>
+        <button class="button is-primary" style="background-color: #45a321" onclick="submitChangeAddress()">Zmień adres</button>
+    </form>
 </body>
 </html>
