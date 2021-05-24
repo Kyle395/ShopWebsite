@@ -31,7 +31,7 @@ function submitLogin() {
 
         },
         error: function (xhr, status, error) {
-            alert("coś się zjebało, kod błędu: " + status);
+            alert(status);
         }
     });
 }
