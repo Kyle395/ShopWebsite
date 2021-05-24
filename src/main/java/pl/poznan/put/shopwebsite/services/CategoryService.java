@@ -34,7 +34,8 @@ public class CategoryService {
 
     public Map<String, List<SubCategoryDto>> getAllCategories() {
         return subCategoryRepository.findAll().stream()
-                .sorted(Comparator.comparing(SubCategory::getName))
+                .sorted(Comparator.comparing((SubCategory subCategory) -> subCategory.getCategoryId().getName())
+                        .thenComparing(SubCategory::getName))
                 .collect(Collectors.groupingBy(
                         subCategory -> subCategory.getCategoryId().getName(),
                         LinkedHashMap::new,
