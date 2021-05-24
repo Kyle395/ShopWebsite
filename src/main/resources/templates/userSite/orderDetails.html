@@ -9,9 +9,33 @@
 <body>
     <th:block th:replace="fragments/common.html :: header(user=${user})" />
     <th:block th:replace="fragments/common.html :: navBar" />
+    <br>
     <h1 class="content">Szczegóły zamówienia</h1>
     <hr class="rcorners1" style="width: 80%;">
     <br>
-
+    <h1 class="insideContent" th:text="'Numer zamówienia: ' + ${orderDetails.getId()}"></h1>
+    <h1 class="insideContent" th:text="'Data złożenia zamówienia: ' + ${orderDetails.getCreatedAt()}"></h1>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Id zamówienia</th>
+            <th>Cena/szt</th>
+            <th>Ilość</th>
+            <th>Suma</th>
+        </tr>
+        </thead>
+        <tr th:each="product : ${orderDetails.getProducts()}">
+            <td th:text="${product.getName()}"></td>
+            <td th:text="${product.getPrice()}"></td>
+            <td th:text="${product.getQuantity()}"></td>
+            <td th:text="${product.getTotal()}"></td>
+        </tr>
+        <tr>
+            <th>Całkowita kwota</th>
+            <td></td><td></td>
+            <th th:text="${orderDetails.getTotal()}"></th>
+        </tr>
+    </table>
 </body>
 </html>

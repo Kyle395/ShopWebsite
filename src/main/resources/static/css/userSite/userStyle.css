@@ -41,6 +41,6 @@ th {
     font-weight: bold;
     text-transform: uppercase;
 }
-tr:nth-child(even) {
+tbody tr:nth-child(odd) {
     background-color: #ccf2bd;
 }
