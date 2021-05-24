@@ -4,7 +4,6 @@ function submitChangePassword() {
         url: "/account/changepassword",
         method: "POST",
         timeout: "3000",
-        contentType: "application/json",
         data: {
             currentPassword: $("#oldPassword").val(),
             newPassword: $("#newPassword1").val(),

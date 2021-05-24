@@ -26,7 +26,7 @@ public class LoginController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> login(HttpSession session,
                                      @RequestParam String login,

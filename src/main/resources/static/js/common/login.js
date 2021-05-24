@@ -14,9 +14,8 @@ function turnLoginOff()
 function submitLogin() {
     $.ajax({
         url: "/account/login",
-        method: "GET",
+        type: "POST",
         timeout: "3000",
-        contentType: "application/json",
         data: {
             login: document.getElementById("username").value,
             password: document.getElementById("password").value
