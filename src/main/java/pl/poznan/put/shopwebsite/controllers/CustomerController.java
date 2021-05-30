@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.repositories.CustomerRepository;
 import pl.poznan.put.shopwebsite.services.CustomerService;
+import pl.poznan.put.shopwebsite.services.customer.ChangeEmailResult;
 import pl.poznan.put.shopwebsite.services.customer.ChangePasswordResult;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("account")
-public class LoginController {
+public class CustomerController {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -59,6 +60,24 @@ public class LoginController {
 
         ChangePasswordResult result = customerService.changePassword(
                 customer, currentPassword, newPassword, newPasswordRepeat
+        );
+
+        return Collections.singletonMap("status", result.toString());
+    }
+
+    @RequestMapping(value = "changeemail", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> changeEmail(HttpSession session,
+                                           @RequestParam String currentEmail,
+                                           @RequestParam String newEmail,
+                                           @RequestParam String newEmailRepeat) {
+        Customer customer = (Customer) session.getAttribute("user");
+        if (customer == null) {
+            return Collections.singletonMap("status", "NOT_LOGGED_IN");
+        }
+
+        ChangeEmailResult result = customerService.changeEmail(
+                customer, currentEmail, newEmail, newEmailRepeat
         );
 
         return Collections.singletonMap("status", result.toString());

@@ -1,10 +1,9 @@
-package pl.poznan.put.shopwebsite.services.orders;
+package pl.poznan.put.shopwebsite.services.products;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import pl.poznan.put.shopwebsite.entities.Product;
 
 import java.math.BigDecimal;
 
@@ -13,10 +12,12 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
+
+    private Long id;
     private String name;
+    private String description;
 
+    private Long quantity;
     private BigDecimal price;
-    private long quantity;
 
-    private BigDecimal total;
 }
