@@ -102,7 +102,7 @@
                     <span th:text="${entry.key}" :hover{color:green}></span>
                 </a>
                 <div class="navbar-dropdown">
-                    <a class="navbar-item" th:each="sub: ${entry.value}">
+                    <a class="navbar-item" th:each="sub: ${entry.value}" th:href="@{/categorySite(subCategoryId=${sub.id})}" th:text="${sub.name}">
                         <span th:text="${sub.name}"></span>
                     </a>
                 </div>
