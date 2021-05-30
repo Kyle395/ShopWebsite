@@ -31,6 +31,6 @@ $.ajax({
         orderContent(data);
     },
     error: function (xhr, status, error) {
-        alert("coś się zjebało, kod błędu: " + status);
+        alert("Kod błędu: " + status);
     }
 });

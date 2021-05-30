@@ -49,7 +49,7 @@ function submitLogout()
             else window.location.reload(true);
         },
         error: function (xhr, status, error) {
-            alert("coś się zjebało, kod błędu: " + status);
+            alert("Kod błędu: " + status);
         }
     });
 }
