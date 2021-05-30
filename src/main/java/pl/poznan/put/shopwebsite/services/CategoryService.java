@@ -8,6 +8,7 @@ import pl.poznan.put.shopwebsite.repositories.CategoryRepository;
 import pl.poznan.put.shopwebsite.repositories.SubCategoryRepository;
 import pl.poznan.put.shopwebsite.services.category.SubCategoryDto;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,18 +21,26 @@ public class CategoryService {
     @Autowired
     private SubCategoryRepository subCategoryRepository;
 
+    @Transactional
     public List<Category> getCategories() {
         return categoryRepository.findAll();
     }
 
+    @Transactional
     public List<SubCategory> getSubCategories() {
         return subCategoryRepository.findAll();
     }
 
-    public List<SubCategory> getALlSubCategories() {
+    @Transactional
+    public List<SubCategory> getAllSubCategories() {
         return subCategoryRepository.findAll();
     }
 
+    public SubCategory getSubCategoryById(Long id) {
+        return subCategoryRepository.getOne(id);
+    }
+
+    @Transactional
     public Map<String, List<SubCategoryDto>> getAllCategories() {
         return subCategoryRepository.findAll().stream()
                 .sorted(Comparator.comparing((SubCategory subCategory) -> subCategory.getCategoryId().getName())

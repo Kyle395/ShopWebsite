@@ -11,9 +11,12 @@ INSERT INTO subcategories (category_id, name) VALUES (2, "Stoły");
 INSERT INTO subcategories (category_id, name) VALUES (3, "4K");
 INSERT INTO subcategories (category_id, name) VALUES (3, "OLED");
 
-INSERT INTO products (name, picture, subcategory_id, description) VALUES ("Intel i5 4690", "", 1, "Tani fajny procek");
-INSERT INTO products (name, picture, subcategory_id, description) VALUES ("Intel i7 asdf", "", 1, "asdf");
-INSERT INTO products (name, picture, subcategory_id, description) VALUES ("Intel i16 asdf", "", 2, "asdfasdf");
+INSERT INTO products (name, picture, subcategory_id, description)
+VALUES ("Intel i5 4690", "productImages\\1.png", 1, "Tani fajny procek");
+INSERT INTO products (name, picture, subcategory_id, description)
+VALUES ("Intel i7 asdf", "productImages\\2.png", 1, "asdf");
+INSERT INTO products (name, picture, subcategory_id, description)
+VALUES ("Intel i16 asdf", "productImages\\3.png", 2, "asdfasdf");
 
 INSERT INTO stock (product_id, quantity, price) VALUES (1, 5, 800.49);
 INSERT INTO stock (product_id, quantity, price) VALUES (2, 15, 1203.49);
