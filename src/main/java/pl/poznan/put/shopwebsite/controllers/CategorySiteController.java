@@ -14,7 +14,7 @@ import pl.poznan.put.shopwebsite.services.ProductService;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class ProductSiteController {
+public class CategorySiteController {
 
     @Autowired
     private CategoryService categoryService;
