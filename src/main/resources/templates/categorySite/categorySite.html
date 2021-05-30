@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="fragments/common.html :: libs"/>
+</head>
+<body>
+<th:block th:replace="fragments/common.html :: header"/>
+<th:block th:replace="fragments/common.html :: navBar"/>
+
+<div class="container">
+    <div class="box" th:each="product: ${products}">
+        <div class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <figure class="image is-64x64">
+                        <img th:src="@{/products(id=${product.id})}"/>
+                    </figure>
+                </div>
+
+            </div>
+            <div class="level-right">
+            </div>
+
+        </div>
+        <div class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <span th:text="${product.name}" :hover{color:green}></span>
+                </div>
+
+            </div>
+            <div class="level-right">
+            </div>
+
+        </div>
+
+
+
+
+</div>
+
+</body>
+</html>
