@@ -23,11 +23,12 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ProductService.AddProductResult addProduct(@RequestParam String name,
+    public String addProduct(@RequestParam String name,
                                                       @RequestParam String description,
                                                       @RequestParam Long subcategoryId,
                                                       @RequestParam MultipartFile picture) {
-        return productService.addProduct(name, description, subcategoryId, picture);
+        productService.addProduct(name, description, subcategoryId, picture);
+        return "redirect:userSite/userSite";
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
