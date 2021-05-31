@@ -174,7 +174,6 @@ INSERT INTO stock (product_id, quantity, price) VALUES (51, 12, 42042.49);
 INSERT INTO stock (product_id, quantity, price) VALUES (52, 12, 42042.49);
 INSERT INTO stock (product_id, quantity, price) VALUES (53, 12, 42042.49);
 INSERT INTO stock (product_id, quantity, price) VALUES (54, 12, 42042.49);
-INSERT INTO stock (product_id, quantity, price) VALUES (55, 12, 42042.49);
 
 INSERT INTO orders (created_at, customer_login) VALUES (CURDATE(), "admin");
 INSERT INTO order_details (order_id, product_id, quantity) VALUES (1, 1, 3);
