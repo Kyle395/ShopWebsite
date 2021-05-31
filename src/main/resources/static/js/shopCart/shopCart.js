@@ -1,7 +1,7 @@
 let currentSite = 0;
 
 function cartContent(cartList) {
-    let content = document.getElementById('orderTable');
+    let content = document.getElementById('cartTable');
     let dataHtml = '';
     if (orderList.length > 0) {
         dataHtml+=`<table><thead><tr><th>Produkt</th><th>Ilość</th>` +
@@ -34,6 +34,6 @@ $.ajax({
         cartContent(data);
     },
     error: function (xhr, status, error) {
-        alert("coś się zjebało, kod błędu: " + status);
+        alert("Kod błędu: " + status);
     }
 });
