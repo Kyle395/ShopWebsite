@@ -12,7 +12,7 @@ import pl.poznan.put.shopwebsite.services.ProductService;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class FormsController {
+public class AddProductController {
 
     @Autowired
     private CategoryService categoryService;
@@ -26,6 +26,6 @@ public class FormsController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("product", productService.getProducts());
         Constants.addLibs(model);
-        return "adminForms";
+        return "addProductForm/addProductForm";
     }
 }
