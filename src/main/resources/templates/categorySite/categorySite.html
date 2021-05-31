@@ -15,8 +15,11 @@
             <div class="level-left">
                 <div class="level-item">
                     <figure class="image is-64x64">
-                        <img th:src="@{/products(id=${product.id})}"/>
+                        <img th:src="@{/products(productId=${product.id})}"/>
                     </figure>
+                </div>
+                <div class="level-item">
+                    <span th:text="${product.description}"></span>
                 </div>
 
             </div>
@@ -27,19 +30,24 @@
         <div class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <span th:text="${product.name}" :hover{color:green}></span>
+                    <span th:text="${product.name}"></span>
                 </div>
 
             </div>
             <div class="level-right">
+                <div class="level-item">
+                    <span th:text="${product.price} + zł"></span>
+                </div>
             </div>
 
         </div>
-
-
-
-
+    </div>
 </div>
+
+<nav class="pagination is-centered" role="navigation">
+    <a th:if="${currentPage} != 0" class="pagination-previous" th:href="@{/categorySite(subCategoryId=${subcategoryId},page=${currentPage - 1})}">Previous</a>
+    <a th:if="${(productsCount - 1) / 20} != ${currentPage}" class="pagination-next" th:href="@{/categorySite(subCategoryId=${subcategoryId},page=${currentPage + 1})}">Next page</a>
+</nav>
 
 </body>
 </html>
