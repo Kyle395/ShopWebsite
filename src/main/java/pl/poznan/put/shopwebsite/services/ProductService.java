@@ -65,7 +65,7 @@ public class ProductService {
     }
 
     @Transactional
-    public AddProductResult addProduct(String name, String description,
+    public Product addProduct(String name, String description,
                                        Long subcategoryId, MultipartFile picture) {
         Product product = new Product();
         product.setName(name);
@@ -81,10 +81,15 @@ public class ProductService {
             productRepository.saveAndFlush(product);
         } catch (IOException e) {
             productRepository.delete(product);
-            return AddProductResult.ERROR;
+            return null;
         }
 
-        return AddProductResult.OK;
+        return product;
+    }
+
+    @Transactional
+    public void addStock(Long productId, BigDecimal price, Long quantity) {
+        stockRepository.save(new Stock(productId, quantity, price));
     }
 
     @Transactional
