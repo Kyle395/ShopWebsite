@@ -16,13 +16,13 @@ public class CartSiteController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/cartSite", method = RequestMethod.GET)
+    @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String getIndex(HttpSession session, Model model) {
         model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("categories", categoryService.getAllCategories());
         Constants.addLibs(model);
 
-        return "cartSite/cartSite";
+        return "shopCart/shopCart";
     }
 
 }
