@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditDB</title>
+
+    <script src="./src/main/resources/static/css/drop-zone.css"></script>
+    <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
+    <link rel="stylesheet" th:href="@{${fontsPath}}"/>
+    <script th:src="@{${jqueryPath}}"></script>
+
+</head>
+<body>
+<div class="container has-text-centered">
+    <div class="box">
+        <div class="field">
+            <label class="label">Product Name</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Product Name">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control is-expanded">
+                <div class="select">
+                    <select name="Categories">
+                        <option value="0">Select category</option>
+                        <th:block th:each="entry: ${categories}">
+                            <option th:each="sub: ${entry.value}">
+                                <span th:text="${entry.key +' -> '+ sub.name}"></span>
+                            </option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <textarea class="textarea is-info" placeholder="Describtion"></textarea>
+        <div id="file-js-example" class="file has-name">
+            <label class="file-label">
+                <input class="file-input" type="file" name="resume">
+                <span class="file-cta">
+      <span class="file-icon">
+        <i class="fas fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Choose a file…
+      </span>
+    </span>
+                <span class="file-name">
+      No file uploaded
+    </span>
+            </label>
+        </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link">Submit</button>
+            </div>
+    </div>
+
+</div>
+<script>
+
+    const fileInput = document.querySelector('#file-js-example input[type=file]');
+    fileInput.onchange = () =
+    >
+    {
+        if (fileInput.files.length > 0) {
+            const fileName = document.querySelector('#file-js-example .file-name');
+            fileName.textContent = fileInput.files[0].name;
+        }
+    }
+</script>
+
+</body>
+</html>
