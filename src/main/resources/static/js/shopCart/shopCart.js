@@ -1,9 +1,9 @@
 let currentSite = 0;
 
 function cartContent(cartList) {
-    let content = document.getElementById('orderTable');
+    let content = document.getElementById('cartTable');
     let dataHtml = '';
-    if (orderList.length > 0) {
+    if (cartList.length > 0) {
         dataHtml+=`<table><thead><tr><th>Produkt</th><th>Ilość</th>` +
             `<th>Cena</th><th>Suma</th></tr></thead><tbody>`;
         for (let product of cartList) {
