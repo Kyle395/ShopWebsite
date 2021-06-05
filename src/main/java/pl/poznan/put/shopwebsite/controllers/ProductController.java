@@ -12,6 +12,7 @@ import pl.poznan.put.shopwebsite.entities.Product;
 import pl.poznan.put.shopwebsite.services.ProductService;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -24,10 +25,12 @@ public class ProductController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String addProduct(@RequestParam String name,
-                                                      @RequestParam String description,
-                                                      @RequestParam Long subcategoryId,
-                                                      @RequestParam MultipartFile picture) {
-        productService.addProduct(name, description, subcategoryId, picture);
+                             @RequestParam String description,
+                             @RequestParam Long subcategoryId,
+                             @RequestParam BigDecimal price,
+                             @RequestParam MultipartFile picture) {
+        Product product = productService.addProduct(name, description, subcategoryId, picture);
+        productService.addStock(product.getId(), price, 1L);
         return "redirect:userSite/userSite";
     }
 
