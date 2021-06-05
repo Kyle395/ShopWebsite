@@ -31,7 +31,7 @@ $.ajax({
     dataType: "json",
     success: function (data, status, xhr) {
         console.log(data);
-        cartContent(data);
+        cartContent([]);
     },
     error: function (xhr, status, error) {
         alert("Kod błędu: " + status);
