@@ -45,7 +45,10 @@
                 </div>
             </div>
         </div>
+        <label class="label">description</label>
         <textarea name="description" class="textarea is-info" placeholder="Description"></textarea>
+        <!--<label class="label">Extended Description</label>
+        <textarea name="extendedDescription" class="textarea is-info" placeholder="extendedDescription"></textarea>-->
         <div id="file-js-example" class="file has-name">
             <label class="file-label">
             <input name="picture" class="file-input" type="file" accept="image/png" oninput="displayUploaded()">
@@ -63,9 +66,12 @@
             </label>
     </div>
         <div class="field is-grouped">
-            <div class="control">
-                <input type="submit">
-            </div>
+            <p class="control">
+                <input class="button" style="background-color:#45a321;color: white;" type="submit" value="Create new product">
+            </p>
+            <p class="control">
+                <input class="button" style="background-color:#45a321;color: white;" type="reset" value="Cancel">
+            </p>
         </div>
         </form>
     </div>
