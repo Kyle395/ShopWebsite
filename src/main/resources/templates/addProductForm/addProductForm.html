@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditDB</title>
+
+    <script src="./src/main/resources/static/css/drop-zone.css"></script>
+    <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
+    <link rel="stylesheet" th:href="@{${fontsPath}}"/>
+    <script th:src="@{${jqueryPath}}"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <form method="post" action="/products/add" name="addProduct" enctype="multipart/form-data">
+        <div class="field">
+            <div class="control is-expanded">
+                <div class="select">
+                    <select name="subcategoryId">
+                        <option value="0">Select category</option>
+                        <th:block th:each="entry: ${categories}">
+                            <th:block th:each="sub: ${entry.value}">
+                                <option th:value="${sub.id}">
+                                    <span th:text="${entry.key +' -> '+ sub.name}"></span>
+                                </option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="field group">
+                <div class="field is-inline-block-desktop">
+                    <div class="control">
+                        <label class="label">Product Name</label>
+                        <input name="name" class="input" type="text" style="width: 150%;" placeholder="Product Name">
+                    </div>
+                </div>
+            </div>
+            <div class="field is-inline-block-desktop">
+                <div class="control">
+                    <label class="label">Price</label>
+                    <input name="price" class="input" type="number" style="width: 33%;" placeholder="Price">
+                </div>
+            </div>
+        </div>
+        <textarea name="description" class="textarea is-info" placeholder="Description"></textarea>
+        <div id="file-js-example" class="file has-name">
+            <label class="file-label">
+            <input name="picture" class="file-input" type="file" accept="image/png" oninput="displayUploaded()">
+            <span class="file-cta">
+                <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                    Choose a file…
+                </span>
+            </span>
+            <span class="file-name">
+                No file uploaded
+            </span>
+            </label>
+    </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <input type="submit">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script src="/js/adminSite/addProductForm.js"></script>
+</body>
+</html>

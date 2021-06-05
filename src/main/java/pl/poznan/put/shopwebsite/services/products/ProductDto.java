@@ -19,5 +19,6 @@ public class ProductDto {
 
     private Long quantity;
     private BigDecimal price;
+    private BigDecimal total;
 
 }

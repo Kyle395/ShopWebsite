@@ -14,7 +14,6 @@ import pl.poznan.put.shopwebsite.services.products.ProductDto;
 
 import javax.transaction.Transactional;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -76,7 +75,9 @@ public class ProductService {
 
         product = productRepository.saveAndFlush(product);
 
-        try (FileOutputStream os = new FileOutputStream(IMAGES_PATH + product.getId() + ".png")) {
+        product.setPicture(IMAGES_PATH + product.getId() + ".png");
+
+        try (FileOutputStream os = new FileOutputStream(product.getPicture())) {
             os.write(picture.getBytes());
             productRepository.saveAndFlush(product);
         } catch (IOException e) {
@@ -107,7 +108,8 @@ public class ProductService {
         Stock stock = getStock(product);
         return new ProductDto(
             product.getId(), product.getName(), product.getDescription(),
-            stock.getQuantity(), stock.getPrice()
+            stock.getQuantity(), stock.getPrice(),
+            stock.getPrice().multiply(BigDecimal.valueOf(stock.getQuantity()))
         );
     }
 
