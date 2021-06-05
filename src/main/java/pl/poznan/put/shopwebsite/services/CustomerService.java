@@ -6,6 +6,10 @@ import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.repositories.CustomerRepository;
 
 import javax.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -22,9 +26,10 @@ public class CustomerService {
             return Optional.empty();
         }
 
-        // TODO hash password
+        String hashedPassword = hash(password);
+
         Customer customer = targetCustomer.get();
-        if (!customer.getPassword().equals(password)) {
+        if (!customer.getPassword().equals(hashedPassword)) {
             return Optional.empty();
         }
 
@@ -38,12 +43,13 @@ public class CustomerService {
             return ChangePasswordResult.PASSWORD_NOT_EQUAL;
         }
 
-        // TODO hash password
-        if (!customer.getPassword().equals(currentPassword)) {
+        String hashedPassword = hash(currentPassword);
+
+        if (!customer.getPassword().equals(hashedPassword)) {
             return ChangePasswordResult.INVALID_DATA;
         }
 
-        customer.setPassword(newPassword);
+        customer.setPassword(hashedPassword);
         customerRepository.saveAndFlush(customer);
 
         return ChangePasswordResult.OK;
@@ -66,8 +72,8 @@ public class CustomerService {
         customer.setLogin(login);
         customer.setEmail(email);
 
-        // TODO hash password
-        customer.setPassword(newPassword);
+        String hashedPassword = hash(newPassword);
+        customer.setPassword(hashedPassword);
 
         customerRepository.saveAndFlush(customer);
 
@@ -89,6 +95,16 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
         return ChangeEmailResult.OK;
+    }
+
+    private static String hash(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hashed);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
     }
 
     public enum ChangePasswordResult {
