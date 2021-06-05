@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.repositories.CustomerRepository;
-import pl.poznan.put.shopwebsite.services.customer.ChangeEmailResult;
-import pl.poznan.put.shopwebsite.services.customer.ChangePasswordResult;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -52,13 +50,37 @@ public class CustomerService {
     }
 
     @Transactional
+    public RegisterResult register(String login,
+                                   String newPassword, String newPasswordRepeat,
+                                   String email) {
+        if (!newPassword.equals(newPasswordRepeat)) {
+            return RegisterResult.PASSWORD_NOT_EQUAL;
+        }
+
+        Optional<Customer> targetCustomer = customerRepository.findById(login);
+        if (targetCustomer.isPresent()) {
+            return RegisterResult.ALREADY_EXISTS;
+        }
+
+        Customer customer = new Customer();
+        customer.setLogin(login);
+        customer.setEmail(email);
+
+        // TODO hash password
+        customer.setPassword(newPassword);
+
+        customerRepository.saveAndFlush(customer);
+
+        return RegisterResult.OK;
+    }
+
+    @Transactional
     public ChangeEmailResult changeEmail(Customer customer, String currentEmail,
                                             String newEmail, String newEmailRepeat) {
         if (!newEmail.equals(newEmailRepeat)) {
             return ChangeEmailResult.EMAIL_NOT_EQUAL;
         }
 
-        // TODO hash password
         if (!customer.getEmail().equals(currentEmail)) {
             return ChangeEmailResult.INVALID_DATA;
         }
@@ -67,6 +89,18 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
         return ChangeEmailResult.OK;
+    }
+
+    public enum ChangePasswordResult {
+        OK, INVALID_DATA, PASSWORD_NOT_EQUAL
+    }
+
+    public enum RegisterResult {
+        OK, ALREADY_EXISTS, PASSWORD_NOT_EQUAL
+    }
+
+    public enum ChangeEmailResult {
+        OK, INVALID_DATA, EMAIL_NOT_EQUAL
     }
 
 }
