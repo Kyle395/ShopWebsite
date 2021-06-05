@@ -3,7 +3,7 @@ let currentSite = 0;
 function cartContent(cartList) {
     let content = document.getElementById('cartTable');
     let dataHtml = '';
-    let totalsum = 0;
+    let totalSum = 0;
     if (cartList.length > 0) {
         dataHtml+=`<table><thead><tr><th>Produkt</th><th>Cena</th>` +
             `<th>Ilość</th><th>Suma</th></tr></thead><tbody>`;
@@ -14,13 +14,13 @@ function cartContent(cartList) {
             }
             selectHtml+='</select>';
             let totalHtml = product.quantity * product.price;
-            totalsum+=totalHtml;
+            totalSum+=totalHtml;
             // TODO dodać link do produktu
             dataHtml+=`<tr><td><a href="/userSite/orderDetails?id=${product.id}">${product.name}</a></td><td>${product.price}</td>
                     <td>${selectHtml}</td><td>${totalHtml}</td></tr>`;
         }
         dataHtml+=` <tr><th>Całkowita kwota</th><td></td><td></td>
-                     <th>${totalsum}</th></tr></tbody></table>`;
+                     <th>${totalSum}</th></tr></tbody></table>`;
     } else {
         dataHtml+="<p style=\"font-size:32px; margin: auto; max-width: 1000px;\">Brak produktów w koszyku.</p>";
     }
