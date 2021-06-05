@@ -108,7 +108,8 @@ public class ProductService {
         Stock stock = getStock(product);
         return new ProductDto(
             product.getId(), product.getName(), product.getDescription(),
-            stock.getQuantity(), stock.getPrice()
+            stock.getQuantity(), stock.getPrice(),
+            stock.getPrice().multiply(BigDecimal.valueOf(stock.getQuantity()))
         );
     }
 
