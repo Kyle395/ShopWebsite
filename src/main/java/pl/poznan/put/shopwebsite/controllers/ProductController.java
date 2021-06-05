@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.entities.Product;
 import pl.poznan.put.shopwebsite.services.ProductService;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -24,14 +26,20 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String addProduct(@RequestParam String name,
+    public String addProduct(HttpSession session,
+                             @RequestParam String name,
                              @RequestParam String description,
                              @RequestParam Long subcategoryId,
                              @RequestParam BigDecimal price,
                              @RequestParam MultipartFile picture) {
+        Customer customer = (Customer) session.getAttribute("user");
+        if (customer == null || !customer.getLogin().equals("admin")) {
+            return "redirect:/";
+        }
+
         Product product = productService.addProduct(name, description, subcategoryId, picture);
         productService.addStock(product.getId(), price, 1L);
-        return "redirect:/userSite";
+        return "redirect:/form";
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
