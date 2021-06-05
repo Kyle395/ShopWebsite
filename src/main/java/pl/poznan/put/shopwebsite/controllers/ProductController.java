@@ -31,7 +31,7 @@ public class ProductController {
                              @RequestParam MultipartFile picture) {
         Product product = productService.addProduct(name, description, subcategoryId, picture);
         productService.addStock(product.getId(), price, 1L);
-        return "redirect:userSite/userSite";
+        return "redirect:/userSite";
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)

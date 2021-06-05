@@ -76,7 +76,9 @@ public class ProductService {
 
         product = productRepository.saveAndFlush(product);
 
-        try (FileOutputStream os = new FileOutputStream(IMAGES_PATH + product.getId() + ".png")) {
+        product.setPicture(IMAGES_PATH + product.getId() + ".png");
+
+        try (FileOutputStream os = new FileOutputStream(product.getPicture())) {
             os.write(picture.getBytes());
             productRepository.saveAndFlush(product);
         } catch (IOException e) {
