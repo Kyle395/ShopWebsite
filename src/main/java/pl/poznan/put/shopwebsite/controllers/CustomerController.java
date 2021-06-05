@@ -7,22 +7,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.poznan.put.shopwebsite.entities.Customer;
-import pl.poznan.put.shopwebsite.repositories.CustomerRepository;
 import pl.poznan.put.shopwebsite.services.CustomerService;
-import pl.poznan.put.shopwebsite.services.customer.ChangeEmailResult;
-import pl.poznan.put.shopwebsite.services.customer.ChangePasswordResult;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("account")
 public class CustomerController {
-
-    @Autowired
-    private CustomerRepository customerRepository;
 
     @Autowired
     private CustomerService customerService;
@@ -43,6 +38,7 @@ public class CustomerController {
         }
 
         session.setAttribute("user", customer.get());
+        session.setAttribute("cart", new HashMap<Long, Integer>());
 
         return Collections.singletonMap("status", "OK");
     }
@@ -58,8 +54,21 @@ public class CustomerController {
             return Collections.singletonMap("status", "NOT_LOGGED_IN");
         }
 
-        ChangePasswordResult result = customerService.changePassword(
+        CustomerService.ChangePasswordResult result = customerService.changePassword(
                 customer, currentPassword, newPassword, newPasswordRepeat
+        );
+
+        return Collections.singletonMap("status", result.toString());
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> register(@RequestParam String login,
+                                        @RequestParam String newPassword,
+                                        @RequestParam String newPasswordRepeat,
+                                        @RequestParam String email) {
+        CustomerService.RegisterResult result = customerService.register(
+                login, newPassword, newPasswordRepeat, email
         );
 
         return Collections.singletonMap("status", result.toString());
@@ -76,7 +85,7 @@ public class CustomerController {
             return Collections.singletonMap("status", "NOT_LOGGED_IN");
         }
 
-        ChangeEmailResult result = customerService.changeEmail(
+        CustomerService.ChangeEmailResult result = customerService.changeEmail(
                 customer, currentEmail, newEmail, newEmailRepeat
         );
 
@@ -87,6 +96,7 @@ public class CustomerController {
     @ResponseBody
     public Map<String, String> logout(HttpSession session) {
         session.removeAttribute("user");
+        session.removeAttribute("cart");
         return Collections.singletonMap("status", "OK");
     }
 
