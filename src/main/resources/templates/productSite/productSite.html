@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="fragments/common.html :: libs"/>
+</head>
+<body>
+<th:block th:replace="fragments/common.html :: header"/>
+<th:block th:replace="fragments/common.html :: navBar"/>
+<div class="container">
+    <div class="box">
+        <div class="columns">
+            <div class="column">
+                <figure class="image">
+                    <img th:src="@{/products(productId=${product.id})}" style="height: 300px;width: 300px"/>
+                </figure>
+            </div>
+            <div class="column">
+                <span  style="font-weight: bold;font-size: 32px" th:text="${product.name}"></span>
+                <br>
+                <span th:text="${product.description}"></span>
+            </div>
+            <div class="column">
+                <div class="level">
+                    <div class="level-left"></div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <span style="font-weight: bold;font-size: 32px" th:text="${product.price} + zł"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="level">
+                    <div class="level-left"></div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <div class="button" style="background-color:#45a321;color: white;">Dodaj do koszyka</div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <p style="font-weight: bold;font-size: 32px">Opis</p>
+        <p><span style="font-size: 32px" th:text="${product.extendedDescription}"></span></p>
+    </div>
+</div>
+</body>
+</html>

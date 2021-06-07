@@ -11,42 +11,50 @@
 
 <div class="container">
     <div class="box" th:each="product: ${products}">
-        <div class="level">
-            <div class="level-left">
-                <div class="level-item">
-                    <figure class="image is-64x64">
-                        <img th:src="@{/products(productId=${product.id})}"/>
-                    </figure>
-                </div>
-                <div class="level-item">
-                    <span th:text="${product.description}"></span>
-                </div>
-
+        <div class="columns">
+            <div class="column is-2">
+                <figure class="image" style="width: 150px">
+                    <a th:href="@{/productSite(id=${product.id})}" style="color: black">
+                        <img th:src="@{/products(productId=${product.id})}" style="height: 150px;width: 150px"/>
+                    </a>
+                </figure>
             </div>
-            <div class="level-right">
+            <div class="column is-5">
+                <a th:href="@{/productSite(id=${product.id})}" style="color: black">
+                    <span  style="font-weight: bold;font-size: 24px" th:text="${product.name}"></span>
+                </a>
+                <br>
+                <span th:text="${product.description}"></span>
             </div>
-
-        </div>
-        <div class="level">
-            <div class="level-left">
-                <div class="level-item">
-                    <span th:text="${product.name}"></span>
+            <div class="column is-5">
+                <div class="level">
+                    <div class="level-left"></div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <span style="font-weight: bold;font-size: 24px" th:text="${product.price} + zł"></span>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-            <div class="level-right">
-                <div class="level-item">
-                    <span th:text="${product.price} + zł"></span>
+                <br>
+                <br>
+                <div class="level">
+                    <div class="level-left"></div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <div class="button" style="background-color:#45a321;color: white;">Dodaj do koszyka</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 <nav class="pagination is-centered" role="navigation">
     <a th:if="${currentPage} != 0" class="pagination-previous" th:href="@{/categorySite(subCategoryId=${subcategoryId},page=${currentPage - 1})}">Previous</a>
-    <a th:if="${(productsCount - 1) / 20} != ${currentPage}" class="pagination-next" th:href="@{/categorySite(subCategoryId=${subcategoryId},page=${currentPage + 1})}">Next page</a>
+    <a th:if="${(productsCount - 1) / 20} != ${currentPage}" class="pagination-next is-right" th:href="@{/categorySite(subCategoryId=${subcategoryId},page=${currentPage + 1})}">Next page</a>
+    <ul class="pagination-list">
+    </ul>
 </nav>
 
 </body>

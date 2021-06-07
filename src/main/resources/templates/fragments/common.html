@@ -52,7 +52,7 @@
 
                 <div th:if="${user == null}" class="navbar-item">
                     <div class="buttons">
-                        <a class="button" style="background-color:#45a321; color: white">
+                        <a class="button" style="background-color:#45a321; color: white" onclick="turnRegisterOn()">
                             <strong>Rejestracja</strong>
                         </a>
                         <a class="button is-light" id="loginButton" onclick="turnLoginOn()">
@@ -92,7 +92,45 @@
             </form>
         </div>
     </div>
+
+    <div th:if="${user == null}" class="modal" id="registerModal">
+        <div class="modal-background" id="rbg" onclick="turnRegisterOff()"></div>
+        <div class="modal-card">
+            <form class="box" onsubmit="return false">
+                <div class="field">
+                    <label class="label">Podaj email</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="email" id="mail">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Nazwa użytkownika</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="nazwa użytkownika" id="usernameReg">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Hasło</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="********" id="passwordReg1">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Powtórz hasło</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="********" id="passwordReg2">
+                    </div>
+                </div>
+
+                <button class="button is-primary" style="background-color: #45a321" onclick="submitRegister()">Zarejestruj</button>
+            </form>
+        </div>
+    </div>
     <script src="/js/common/login.js"></script>
+    <script src="/js/common/register.js"></script>
 </div>
 
 <div th:fragment="navBar">
