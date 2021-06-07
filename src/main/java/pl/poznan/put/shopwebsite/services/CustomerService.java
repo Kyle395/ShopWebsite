@@ -49,7 +49,8 @@ public class CustomerService {
             return ChangePasswordResult.INVALID_DATA;
         }
 
-        customer.setPassword(hashedPassword);
+        String hashedNewPassword = hash(newPassword);
+        customer.setPassword(hashedNewPassword);
         customerRepository.saveAndFlush(customer);
 
         return ChangePasswordResult.OK;
