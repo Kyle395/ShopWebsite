@@ -1,4 +1,4 @@
-INSERT INTO customers (login, password, email) VALUES ("admin", "admin", "admin@localhost");
+INSERT INTO customers (login, password, email) VALUES ("admin", "jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=", "admin@localhost");
 
 INSERT INTO categories (name) VALUES ("Podzespoły komputerowe");
 INSERT INTO categories (name) VALUES ("Meble");

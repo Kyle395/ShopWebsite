@@ -105,11 +105,17 @@ public class ProductService {
 
     @Transactional
     public ProductDto from(Product product) {
+        return from(product, false);
+    }
+
+    @Transactional
+    public ProductDto from(Product product, boolean extended) {
         Stock stock = getStock(product);
         return new ProductDto(
-            product.getId(), product.getName(), product.getDescription(),
-            stock.getQuantity(), stock.getPrice(),
-            stock.getPrice().multiply(BigDecimal.valueOf(stock.getQuantity()))
+                product.getId(), product.getName(), product.getDescription(),
+                extended ? product.getExtendedDescription() : null,
+                stock.getQuantity(), stock.getPrice(),
+                stock.getPrice().multiply(BigDecimal.valueOf(stock.getQuantity()))
         );
     }
 
