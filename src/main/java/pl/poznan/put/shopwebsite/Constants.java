@@ -12,6 +12,12 @@ public class Constants {
     public static final String BULMA_PATH = "/css/bulma.min.css";
     public static final String BULMA_DEBUG_PATH = "/css/bulma.css";
 
+    public static final String BULMA_CAROUSEL_CSS_PATH = "/css/bulma-carousel.min.css";
+    public static final String BULMA_CAROUSEL_CSS_DEBUG_PATH = "/css/bulma-carousel.min.css";
+
+    public static final String BULMA_CAROUSEL_JS_PATH = "/js/bulma-carousel.min.js";
+    public static final String BULMA_CAROUSEL_JS_DEBUG_PATH = "/js/bulma-carousel.min.js";
+
     public static final String FONTS_PATH = "/css/fa5.min.css";
     public static final String FONTS_DEBUG_PATH = "/css/fa5.css";
 
@@ -22,6 +28,8 @@ public class Constants {
 
     public static void addLibs(Model model) {
         model.addAttribute("bulmaPath", DEBUG ? BULMA_DEBUG_PATH : BULMA_PATH);
+        model.addAttribute("bulmaCarouselCssPath", DEBUG ? BULMA_CAROUSEL_CSS_DEBUG_PATH : BULMA_CAROUSEL_CSS_PATH);
+        model.addAttribute("bulmaCarouselJsPath", DEBUG ? BULMA_CAROUSEL_JS_DEBUG_PATH : BULMA_CAROUSEL_JS_PATH);
         model.addAttribute("fontsPath", DEBUG ? FONTS_DEBUG_PATH : FONTS_PATH);
         model.addAttribute("jqueryPath", DEBUG ? JQUERY_DEBUG_PATH : JQUERY_PATH);
     }

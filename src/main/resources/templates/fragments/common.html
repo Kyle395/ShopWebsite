@@ -5,10 +5,12 @@
     <title>Title</title>
     <th:block th:fragment="libs">
         <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
+        <link rel="stylesheet" th:href="@{${bulmaCarouselCssPath}}"/>
         <link rel="stylesheet" th:href="@{${fontsPath}}"/>
         <link rel="stylesheet" href="/css/common/hovers.css"/>
         <link rel="stylesheet" href="/css/common/login.css"/>
         <script th:src="@{${jqueryPath}}"></script>
+        <script th:src="@{${bulmaCarouselJsPath}}"></script>
     </th:block>
 </head>
 <body>
@@ -17,8 +19,11 @@
 
         <div class="navbar-brand">
             <span class="icon-text">
-                <span class="icon is-large">
-                    <i class="fab fa-accessible-icon fa-3x" style="color:#45a321"></i>
+                <span class="icon is-large mt-3 ml-3">
+                    <!--<i class="fab fa-accessible-icon fa-3x" style="color:#45a321"></i>-->
+                    <a href="/">
+                        <img src="/logo.png" style="width:50px;height:50px;">
+                    </a>
                 </span>
             </span>
         </div>
