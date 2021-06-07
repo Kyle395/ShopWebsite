@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-
-  <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
-  <link rel="stylesheet" th:href="@{${fontsPath}}"/>
-  <link  rel="stylesheet" th:href="~bulma-carousel/dist/css/bulma-carousel.min.css"/>
-
-  <script th:src="@{${jqueryPath}}"></script>
-
+  <th:block th:replace="fragments/common.html :: libs"/>
 </head>
 <body>
+<th:block th:replace="fragments/common.html :: header"/>
+<th:block th:replace="fragments/common.html :: navBar"/>
 </body>
 </html>

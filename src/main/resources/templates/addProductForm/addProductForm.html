@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <title>EditDB</title>
 
-    <script src="./src/main/resources/static/css/drop-zone.css"></script>
-    <link rel="stylesheet" th:href="@{${bulmaPath}}"/>
-    <link rel="stylesheet" th:href="@{${fontsPath}}"/>
-    <script th:src="@{${jqueryPath}}"></script>
-
+    <th:block th:replace="fragments/common.html :: libs"/>
+    <script src="/css/drop-zone.css"></script>
 </head>
 <body>
+<th:block th:replace="fragments/common.html :: header"/>
+<th:block th:replace="fragments/common.html :: navBar"/>
 <div class="container">
     <div class="box">
         <form method="post" action="/products/add" name="addProduct" enctype="multipart/form-data">
@@ -30,23 +29,25 @@
                     </select>
                 </div>
             </div>
+            <br>
             <div class="field group">
                 <div class="field is-inline-block-desktop">
                     <div class="control">
                         <label class="label">Product Name</label>
-                        <input name="name" class="input" type="text" style="width: 150%;" placeholder="Product Name">
+                        <input name="name" class="input" type="text" style="width: 400px;" placeholder="Product Name">
                     </div>
                 </div>
             </div>
             <div class="field is-inline-block-desktop">
                 <div class="control">
                     <label class="label">Price</label>
-                    <input name="price" class="input" type="number" style="width: 33%;" placeholder="Price">
+                    <input name="price" class="input" type="number" style="width: 150px;" placeholder="Price">
                 </div>
             </div>
         </div>
-        <label class="label">description</label>
+        <label class="label">Description</label>
         <textarea name="description" class="textarea is-info" placeholder="Description"></textarea>
+        <br>
         <!--<label class="label">Extended Description</label>
         <textarea name="extendedDescription" class="textarea is-info" placeholder="extendedDescription"></textarea>-->
         <div id="file-js-example" class="file has-name">
@@ -64,7 +65,8 @@
                 No file uploaded
             </span>
             </label>
-    </div>
+        </div>
+        <br>
         <div class="field is-grouped">
             <p class="control">
                 <input class="button" style="background-color:#45a321;color: white;" type="submit" value="Create new product">
@@ -72,7 +74,7 @@
             <p class="control">
                 <input class="button" style="background-color:#45a321;color: white;" type="reset" value="Cancel">
             </p>
-        </div>
+            </div>
         </form>
     </div>
 </div>
