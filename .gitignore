@@ -1,3 +1,5 @@
 /target/
-/*.iml/
+/*.iml
+/productImages/*.png
+!/productImages/r.png
 /.idea/
