@@ -4,7 +4,6 @@ function cartChange(id, quantity) {
         url: "/cart/change",
         method: "POST",
         timeout: "3000",
-        dataType: "json",
         data: {
             id : id,
             quantity : quantity
@@ -20,27 +19,24 @@ function cartChange(id, quantity) {
     });
 }
 
-function cartContent(cartList) {
+function cartContent(cartDto) {
     let content = document.getElementById('cartTable');
     let dataHtml = '';
-    let totalSum = 0;
-    if (cartList.length > 0) {
+    if (cartDto.cartList.length > 0) {
         dataHtml+=`<table><thead><tr><th>Produkt</th><th>Cena</th>` +
             `<th>Ilość</th><th>Suma</th></tr></thead><tbody>`;
         //TODO usuwanie
-        for (let product of cartList) {
+        for (let product of cartDto.cartList) {
             let selectHtml = `<select onchange="cartChange(${product.id}, this.value)">`;
             for (let i =1; i<=9; i++) {
                 selectHtml+= `<option${product.quantity === i ? ' selected' : ''}>`+ i +'</option>';
             }
             selectHtml+='</select>';
-            let totalHtml = product.quantity * product.price;
-            totalSum+=totalHtml;
-            dataHtml+=`<tr><td><a href="/produckSite?id=${product.id}">${product.name}</a></td><td>${product.price}</td>
-                    <td>${selectHtml}</td><td>${totalHtml}</td></tr>`;
+            dataHtml+=`<tr><td><a href="/productSite?id=${product.id}">${product.name}</a></td><td>${product.price}</td>
+                    <td>${selectHtml}</td><td>${product.total}</td></tr>`;
         }
         dataHtml+=` <tr><th>Całkowita kwota</th><td></td><td></td>
-                     <th>${totalSum}</th></tr></tbody></table>`;
+                     <th>${cartDto.total}</th></tr></tbody></table>`;
     } else {
         dataHtml+="<p style=\"font-size:32px; margin: auto; max-width: 1000px;\">Brak produktów w koszyku.</p>";
     }
@@ -57,7 +53,7 @@ function updateCart() {
         dataType: "json",
         success: function (data, status, xhr) {
             console.log(data);
-            cartContent([]);
+            cartContent(data);
         },
         error: function (xhr, status, error) {
             alert("Kod błędu: " + status);
