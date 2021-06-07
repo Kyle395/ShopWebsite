@@ -64,11 +64,12 @@ public class ProductService {
     }
 
     @Transactional
-    public Product addProduct(String name, String description,
-                                       Long subcategoryId, MultipartFile picture) {
+    public Product addProduct(String name, String description, String extendedDescription,
+                              Long subcategoryId, MultipartFile picture) {
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
+        product.setExtendedDescription(extendedDescription);
 
         SubCategory subCategory = categoryService.getSubCategoryById(subcategoryId);
         product.setSubcategoryId(subCategory);

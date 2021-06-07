@@ -29,6 +29,7 @@ public class ProductController {
     public String addProduct(HttpSession session,
                              @RequestParam String name,
                              @RequestParam String description,
+                             @RequestParam String extendedDescription,
                              @RequestParam Long subcategoryId,
                              @RequestParam BigDecimal price,
                              @RequestParam MultipartFile picture) {
@@ -37,7 +38,7 @@ public class ProductController {
             return "redirect:/";
         }
 
-        Product product = productService.addProduct(name, description, subcategoryId, picture);
+        Product product = productService.addProduct(name, description, extendedDescription, subcategoryId, picture);
         productService.addStock(product.getId(), price, 1L);
         return "redirect:/form";
     }
