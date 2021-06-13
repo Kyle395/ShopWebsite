@@ -19,13 +19,47 @@ function cartChange(id, quantity) {
     });
 }
 
+function cartRemove(id) {
+    $.ajax({
+        url: "/cart/remove",
+        method: "POST",
+        timeout: "3000",
+        data: {
+            id : id
+        },
+        success: function (data, status, xhr) {
+            console.log(data);
+            updateCart();
+        },
+        error: function (xhr, status, error) {
+            updateCart();
+            alert("Kod błędu: " + status);
+        }
+    });
+}
+
+function submitOrder() {
+    $.ajax({
+        url: "/orders/submit",
+        method: "POST",
+        timeout: "3000",
+        success: function (data, status, xhr) {
+            console.log(data);
+            updateCart();
+        },
+        error: function (xhr, status, error) {
+            updateCart();
+            alert("Kod błędu: " + status);
+        }
+    });
+}
+
 function cartContent(cartDto) {
     let content = document.getElementById('cartTable');
     let dataHtml = '';
     if (cartDto.cartList.length > 0) {
         dataHtml+=`<table><thead><tr><th>Produkt</th><th>Cena</th>` +
-            `<th>Ilość</th><th>Suma</th></tr></thead><tbody>`;
-        //TODO usuwanie
+            `<th>Ilość</th><th>Suma</th><th></th></tr></thead><tbody>`;
         for (let product of cartDto.cartList) {
             let selectHtml = `<select onchange="cartChange(${product.id}, this.value)">`;
             for (let i =1; i<=9; i++) {
@@ -33,10 +67,18 @@ function cartContent(cartDto) {
             }
             selectHtml+='</select>';
             dataHtml+=`<tr><td><a href="/productSite?id=${product.id}">${product.name}</a></td><td>${product.price}</td>
-                    <td>${selectHtml}</td><td>${product.total}</td></tr>`;
+                    <td>${selectHtml}</td><td>${product.total}</td><td>
+                    <div class="button" style="background-color: #45a321; color: white;" 
+                    onclick="cartRemove(${product.id})">Usuń</div>
+                    </td></tr>`;
+
         }
         dataHtml+=` <tr><th>Całkowita kwota</th><td></td><td></td>
-                     <th>${cartDto.total}</th></tr></tbody></table>`;
+                     <th>${cartDto.total}</th><td></td></tr></tbody></table>`;
+
+        dataHtml+=`<br><table class="invisible"><thead><tr><td class="invisible"></td><td class="invisible"></td><td class="invisible">
+                    <div class="button" style="background-color: #45a321; color: white;font-weight: bold; padding-left: 5px;" 
+                    onclick="submitOrder()">Złóż zamówienie</div</td></tr></thead></table>`;
     } else {
         dataHtml+="<p style=\"font-size:32px; margin: auto; max-width: 1000px;\">Brak produktów w koszyku.</p>";
     }
