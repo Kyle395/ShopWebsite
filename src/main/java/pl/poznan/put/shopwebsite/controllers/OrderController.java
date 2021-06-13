@@ -13,11 +13,12 @@ import pl.poznan.put.shopwebsite.entities.Customer;
 import pl.poznan.put.shopwebsite.entities.Order;
 import pl.poznan.put.shopwebsite.entities.OrderDetails;
 import pl.poznan.put.shopwebsite.entities.Product;
+import pl.poznan.put.shopwebsite.services.CartService;
 import pl.poznan.put.shopwebsite.services.OrderService;
 import pl.poznan.put.shopwebsite.services.ProductService;
 import pl.poznan.put.shopwebsite.services.orders.OrderDetailsDto;
 import pl.poznan.put.shopwebsite.services.orders.OrderDto;
-import pl.poznan.put.shopwebsite.services.orders.ProductDto;
+import pl.poznan.put.shopwebsite.services.products.ProductDto;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -30,6 +31,9 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     private static final int PAGE_SIZE = 10;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private OrderService orderService;
@@ -66,6 +70,20 @@ public class OrderController {
                     );
                 })
                 .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "submit", method = RequestMethod.POST)
+    @ResponseBody
+    public void submitOrder(HttpSession session) {
+        Customer customer = (Customer) session.getAttribute("user");
+        if (customer == null) {
+            return;
+        }
+
+        List<ProductDto> cart = cartService.getCart(session);
+
+        orderService.submitOrder(customer, cart);
+        cartService.clearCart(session);
     }
 
 }

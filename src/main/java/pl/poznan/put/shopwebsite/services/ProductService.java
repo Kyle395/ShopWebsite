@@ -58,9 +58,24 @@ public class ProductService {
     }
 
     @Transactional
+    public List<ProductDto> getProductsByName(String name, Integer page) {
+        return productRepository.findAllByNameContaining(
+                name,
+                PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.ASC, "name"))
+        ).stream()
+                .map(this::from)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public long getCountBySubcategoryId(Long id) {
         SubCategory subCategory = categoryService.getSubCategoryById(id);
         return productRepository.countAllBySubcategoryId(subCategory);
+    }
+
+    @Transactional
+    public long getCountByName(String name) {
+        return productRepository.countAllByNameContaining(name);
     }
 
     @Transactional

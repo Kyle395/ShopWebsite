@@ -29,12 +29,15 @@ public class CartController {
     public void addToCart(HttpSession session,
                           @RequestParam Long id,
                           @RequestParam Integer quantity) {
+        if (session.getAttribute("user") == null) return;
         cartService.addToCart(session, id, quantity);
     }
 
     @RequestMapping(value = "get", method = RequestMethod.GET)
     @ResponseBody
     public CartDto getCart(HttpSession session) {
+        if (session.getAttribute("user") == null) return null;
+
         List<ProductDto> cart = cartService.getCart(session);
         BigDecimal total = cart.stream()
                 .reduce(BigDecimal.ZERO,
@@ -48,6 +51,7 @@ public class CartController {
     public void changeQuantityInCart(HttpSession session,
                           @RequestParam Long id,
                           @RequestParam Integer quantity) {
+        if (session.getAttribute("user") == null) return;
         cartService.changeQuantityInCart(session, id, quantity);
     }
 
@@ -55,6 +59,7 @@ public class CartController {
     @ResponseBody
     public void removeFromCart(HttpSession session,
                                @RequestParam Long id) {
+        if (session.getAttribute("user") == null) return;
         cartService.removeFromCart(session, id);
     }
 
