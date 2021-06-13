@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,4 +84,21 @@ public class OrderService {
         );
     }
 
+    @Transactional
+    public void submitOrder(Customer customer, List<pl.poznan.put.shopwebsite.services.products.ProductDto> cart) {
+        Order order = new Order();
+        order.setCreatedAt(new Date());
+        order.setCustomerLogin(customer);
+
+        orderRepository.saveAndFlush(order);
+
+        cart.forEach(productDto -> {
+            OrderDetails details = new OrderDetails();
+            details.setOrderId(order);
+            details.setProductId(productService.getProductById(productDto.getId()));
+            details.setQuantity(productDto.getQuantity());
+
+            orderDetailsRepository.saveAndFlush(details);
+        });
+    }
 }

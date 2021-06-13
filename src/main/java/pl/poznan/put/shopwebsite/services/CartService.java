@@ -62,4 +62,8 @@ public class CartService {
         return value;
     }
 
+    public void clearCart(HttpSession session) {
+        Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute("cart");
+        cart.clear();
+    }
 }
