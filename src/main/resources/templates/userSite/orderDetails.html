@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tr th:each="product : ${orderDetails.getProducts()}">
-            <td th:text="${product.getName()}"></td>
+            <td><a th:text="${product.getName()}" th:href="@{/productSite(id=${product.getId()})}"></a></td>
             <td th:text="${product.getPrice()}"></td>
             <td th:text="${product.getQuantity()}"></td>
             <td th:text="${product.getTotal()}"></td>
