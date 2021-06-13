@@ -42,7 +42,8 @@
                     <div class="level-left"></div>
                     <div class="level-right">
                         <div class="level-item">
-                            <div class="button" style="background-color:#45a321;color: white;" th:onclick="'addToCart(' + ${product.id} + ')'">Dodaj do koszyka</div>
+                            <div th:if="${user == null}"disabled class="button" style="background-color:#45a321;color: white;">Dodaj do koszyka</div>
+                            <div th:if="${user != null}" class="button" style="background-color:#45a321;color: white;" th:onclick="'addToCart(' + ${product.id} + ')'">Dodaj do koszyka</div>
                         </div>
                     </div>
             </div>
@@ -53,6 +54,15 @@
         <p><span style="font-size: 32px" th:text="${product.extendedDescription}"></span></p>
     </div>
 </div>
+</div>
+<div class="modal" id="modalAdd">
+    <div class="modal-background" id="lbg" onclick="turnAddOff()"></div>
+    <div class="modal-card">
+        <div class="box has-text-centered">
+
+            Dodałeś <span th:text="${product.name}" do koszyka, mój bąbelek pojedzie na kolonie
+        </div>
+    </div>
 </div>
 <script src="/js/productSite/productSite.js"></script>
 

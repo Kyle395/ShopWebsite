@@ -8,7 +8,7 @@ function addToCart(id) {
             quantity : 1
         },
         success: function (data, status, xhr) {
-            alert("sukces");
+            turnAddOn()
         },
         error: function (xhr, status, error) {
             alert(status + " " + error);
@@ -16,3 +16,14 @@ function addToCart(id) {
     });
 }
 
+function turnAddOn()
+{
+    var addModal = document.getElementById('modalAdd');
+    addModal.classList.add('is-active')
+}
+
+function turnAddOff()
+{
+    var addModal = document.getElementById('modalAdd');
+    addModal.classList.remove('is-active')
+}
