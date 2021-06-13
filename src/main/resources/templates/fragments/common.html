@@ -35,12 +35,12 @@
                     Home
                 </a>
 
-                <div class="navbar-item">
-                    <form action="/searchSite">
-                        <input class="input" type="text" placeholder="szukaj" style="border-color:#45a321">
-                        <input type="submit" value="szukaj">
-                    </form>
-                </div>
+                <form class="navbar-item" action="/searchSite">
+                    <input class="input" type="text" placeholder="szukaj" style="border-color:#45a321" name="searchText">
+                    <div class="control">
+                        <input type="submit" class="button" value="szukaj" style="border-color: #45a321">
+                    </div>
+                </form>
             </div>
 
             <div class="navbar-end">

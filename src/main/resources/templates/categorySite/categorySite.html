@@ -45,7 +45,6 @@
                             <div th:if="${user == null}"disabled class="button" style="background-color:#45a321;color: white;">Dodaj do koszyka</div>
                             <div th:if="${user != null}" class="button" style="background-color:#45a321;color: white;" th:onclick="'addToCart(' + ${product.id} +  ')'">Dodaj do koszyka</div>
                         </div>
-                        <script src="/js/productSite/productSite.js"></script>
                     </div>
                 </div>
             </div>
