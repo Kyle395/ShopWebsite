@@ -71,7 +71,7 @@ public class OrderService {
                     long quantity = orderDetails.getQuantity();
 
                     return new ProductDto(
-                            product.getName(), price, quantity, price.multiply(BigDecimal.valueOf(quantity))
+                            product.getId(), product.getName(), price, quantity, price.multiply(BigDecimal.valueOf(quantity))
                     );
                 })
                 .collect(Collectors.toList());
