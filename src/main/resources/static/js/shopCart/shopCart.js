@@ -74,11 +74,11 @@ function cartContent(cartDto) {
 
         }
         dataHtml+=` <tr><th>Całkowita kwota</th><td></td><td></td>
-                     <th>${cartDto.total}</th><td></td></tr></tbody></table>`;
+                     <th>${cartDto.total}</th><td></td></tr>`;
 
-        dataHtml+=`<br><table class="invisible"><thead><tr><td class="invisible"></td><td class="invisible"></td><td class="invisible">
-                    <div class="button" style="background-color: #45a321; color: white;font-weight: bold; padding-left: 5px;" 
-                    onclick="submitOrder()">Złóż zamówienie</div</td></tr></thead></table>`;
+        dataHtml+=` <tr></tr><tr style="background-color: white"><td class="invisible"></td><td class="invisible"></td><td class="invisible"></td>
+                    <td class="invisible"><div class="button" style="background-color: #45a321; color: white;font-weight: bold; padding-left: 5px;" 
+                    onclick="submitOrder()">Złóż zamówienie</div</td></tr></tbody></table>`;
     } else {
         dataHtml+="<p style=\"font-size:32px; margin: auto; max-width: 1000px;\">Brak produktów w koszyku.</p>";
     }

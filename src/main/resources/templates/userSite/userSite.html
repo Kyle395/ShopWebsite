@@ -13,7 +13,7 @@
     <h1 class="content">Panel użytkownika</h1>
     <hr class="rcorners1" style="width: 80%;">
     <br>
-    <h1 class="insideContent"><a href="userSite/changeAddress">Zmień adres email&emsp;</a><a href="userSite/changePassword">Zmień hasło</a></h1>
+    <h1 class="insideContent"><a href="userSite/changeAddress">Zmień adres email&emsp;</a><a href="userSite/changePassword">Zmień hasło&emsp;</a><a th:if="${user != null && user.login == 'admin'}" href="form">Dodaj produkt</a></h1>
     <br><br>
     <h1 class="content">Historia zamówień</h1>
     <hr class="rcorners1" style="width: 80%;">
